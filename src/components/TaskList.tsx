@@ -22,7 +22,7 @@ export function TaskList() {
       title: newTaskTitle,
       isComplete: false,
     }
-    setTasks([...tasks, newTask]);
+    setTasks((oldState) => [...oldState, newTask]);
   }
 
   function handleToggleTaskCompletion(id: number) {
@@ -31,13 +31,13 @@ export function TaskList() {
       if (task.id === id) return { ...task, isComplete: !task.isComplete};
       return task;
     })
-    setTasks(newTasks);
+    setTasks(() => newTasks);
   }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
     const newTasks = tasks.filter((task) => task.id !== id);
-    setTasks(newTasks);
+    setTasks(() => newTasks);
   }
 
   return (
